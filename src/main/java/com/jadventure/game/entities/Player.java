@@ -355,6 +355,14 @@ public class Player extends Entity {
     }
 
     public void pickUpItem(String itemName) {
+        if (itemName.equals("*")) {
+            for (Item item : getLocation().getItems()) {
+                addItemToStorage(item);
+                location.removeItem(item);
+                QueueProvider.offer(item.getName() + " picked up");
+            }
+            return;
+        }
         List<Item> items = searchItem(itemName, getLocation().getItems());
         if (! items.isEmpty()) {
             Item item = items.get(0);
