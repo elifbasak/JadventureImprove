@@ -48,6 +48,10 @@ form the majority of the project's documentation and development guidelines.
  1. [shkesar](https://github.com/shkesar)
  1. [paddatrapper](https://github.com/paddatrapper)
  1. [Dev-Osmium](https://github.com/Dev-Osmium)
+ 1. [ayberkuslu](https://github.com/ayberkuslu)
+ 1. [elifbasak](https://github.com/elifbasak)
+ 1. [nehiridil](https://github.com/nehiridil)
+ 1. [scaltunsoy](https://github.com/scaltunsoy)
 
 Contributing
 -------------
