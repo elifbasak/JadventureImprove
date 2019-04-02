@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -15,8 +16,8 @@ import org.slf4j.LoggerFactory;
 
 public class QueueProvider {
     private static Logger logger = LoggerFactory.getLogger(QueueProvider.class);
-    public static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
-    public static BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>();
+    public static Queue<String> queue = new LinkedBlockingQueue<>();
+    public static Queue<String> inputQueue = new LinkedBlockingQueue<>();
     public static DataOutputStream out;
     public static DataInputStream in;
     public static GameModeType mode;
@@ -33,7 +34,7 @@ public class QueueProvider {
         mode = modeInc;
     }
 
-    public static BlockingQueue<String> getQueue() {
+    public static Queue<String> getQueue() {
         return queue;
     }
 

@@ -7,13 +7,14 @@ import com.jadventure.game.repository.LocationRepository;
 import com.jadventure.game.prompts.CommandParser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains the main loop that takes the input and
  * does the according actions.
  */
 public class Game {
-    public ArrayList<Monster> monsterList = new ArrayList<Monster>();
+    public List<Monster> monsterList = new ArrayList<Monster>();
     public MonsterFactory monsterFactory = new MonsterFactory(); 
     public CommandParser parser;
     public Monster monster;

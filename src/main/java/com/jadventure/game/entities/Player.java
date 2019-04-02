@@ -300,7 +300,8 @@ public class Player extends Entity {
         locations.put(EquipmentLocation.BOTH_ARMS, "bothArms");
         locations.put(EquipmentLocation.LEGS, "legs");
         locations.put(EquipmentLocation.FEET, "feet");
-        HashMap<String, String> equipment = new HashMap<>();
+        Map<String, String> equipment ;
+        equipment = new HashMap<>();
         Item hands = itemRepo.getItem("hands");
         for (Map.Entry<EquipmentLocation, Item> item : getEquipment().entrySet()) {
             if (item.getKey() != null && !hands.equals(item.getValue()) && item.getValue() != null) {
