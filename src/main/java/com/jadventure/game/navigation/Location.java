@@ -1,6 +1,8 @@
 package com.jadventure.game.navigation;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -158,9 +160,12 @@ public class Location implements ILocation {
     }
     
     public void cleanUpMonster(List<Monster> monsters) {
-    	for (Monster monster:monsters)
+    	Iterator<Monster> iter= monsters.iterator();
+    	while(iter.hasNext()) {
+    		Monster monster=iter.next();
     		if(monster.getHealth()==0)
-    			removeMonster(monster);	
+    			iter.remove();
+    	}
     }
     
     public List<Monster> getMonsters() {
