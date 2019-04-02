@@ -43,6 +43,7 @@ public class ConversationManager {
         ACTION_TYPE_MAP.put("trade", ActionType.TRADE);
         ACTION_TYPE_MAP.put("give", ActionType.GIVE);
         ACTION_TYPE_MAP.put("take", ActionType.TAKE);
+        ACTION_TYPE_MAP.put("gamble", ActionType.GAMBLE);
         CONDITION_TYPE_MAP.put("none", ConditionType.NONE);
         CONDITION_TYPE_MAP.put("ally", ConditionType.ALLY);
         CONDITION_TYPE_MAP.put("enemy", ConditionType.ENEMY);
