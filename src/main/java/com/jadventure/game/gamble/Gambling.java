@@ -39,7 +39,7 @@ public class Gambling {
 	public void bullsAndCows() {
 		QueueProvider.offer("How much do you want to bet?");
 		String input;
-		int bet, bulls, cows, tries = 0;
+		int bet, bulls = 0, cows, tries = 0;
 		while (true) {
 			input = QueueProvider.take();
 			try {
@@ -62,7 +62,7 @@ public class Gambling {
 		QueueProvider.offer("I have a number with 4 distinct digits. Predict it. I will give you hints later.");
 		QueueProvider.offer("If you find the number at most 8 trying, you'll get the money!");
 
-        while (tries < 8) {
+        while (tries < 8 || bulls != 4) {
             input = QueueProvider.take();
             try {
                 validateInput(input);
@@ -71,8 +71,17 @@ public class Gambling {
             }
             bulls = getBull(input, number);
             cows = getCow(input, number);
-        }
 
+            QueueProvider.offer("Bulls:\t" + bulls);
+            QueueProvider.offer("Cows:\t" + cows);
+            tries++;
+        }
+        if (bulls == 4) {
+            QueueProvider.offer("Congratulations! You have won " + (bet * 2) + " golds!");
+            player.setGold(bet * 2);
+        } else {
+            QueueProvider.offer("Don't press your luck. Maybe next time.");
+        }
 	}
 
     int getBull(String input, String number) {
