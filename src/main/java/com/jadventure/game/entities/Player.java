@@ -271,7 +271,7 @@ public class Player extends Entity {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("name", getName());
         jsonObject.addProperty("healthMax", getHealthMax());
-        jsonObject.addProperty("health", getHealthMax());
+        jsonObject.addProperty("health", getHealth());
         jsonObject.addProperty("armour", getArmour());
         jsonObject.addProperty("damage", getDamage());
         jsonObject.addProperty("level", getLevel());
