@@ -373,6 +373,19 @@ public class Player extends Entity {
             location.removeItem(item);
             QueueProvider.offer(item.getName()+ " picked up");
         }
+        
+        items=getLocation().getItems();
+        try {
+        	int number=Integer.parseInt(itemName);
+        	if(items.size()>=number) {
+        		Item item=items.get(number-1);
+        		addItemToStorage(item);
+                location.removeItem(item);
+                QueueProvider.offer(item.getName()+ " picked up");
+        	}
+        }catch(NumberFormatException e){
+        	System.out.println("Invalid item name!");
+        }
 
     }
 
