@@ -9,6 +9,7 @@ import com.jadventure.game.repository.ItemRepository;
 import com.jadventure.game.QueueProvider;
 import com.jadventure.game.DeathException;
 import com.jadventure.game.Trading;
+import com.jadventure.game.gamble.Gambling;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -155,6 +156,11 @@ public class ConversationManager {
                 Trading t = new Trading(npc, player);
                 t.trade(true, true);
                 break;
+            case GAMBLE:
+                Gambling g = new Gambling(player);
+                g.gambling();
+                break;
+
         }     
     }
 

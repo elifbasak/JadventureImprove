@@ -7,5 +7,6 @@ public enum ActionType {
     SELL,
     TRADE,
     GIVE,
-    TAKE
+    TAKE,
+    GAMBLE
 }
