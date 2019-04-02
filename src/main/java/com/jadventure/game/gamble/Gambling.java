@@ -66,8 +66,8 @@ public class Gambling {
             } catch (Exception e) {
                 continue;
             }
-            bulls = getBull();
-            cows = getCow();
+            bulls = getBull(input, number);
+            cows = getCow(input, number);
         }
 
 	}
