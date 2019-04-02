@@ -63,6 +63,7 @@ public class Client {
              input = new Scanner(System.in);
              String userInput = input.nextLine();
              out.writeUTF(userInput);
+             input.close();
          } catch (IOException e) {
              e.printStackTrace(); 
          } 

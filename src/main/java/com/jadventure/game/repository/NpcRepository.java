@@ -1,12 +1,5 @@
 package com.jadventure.game.repository;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.jadventure.game.entities.NPC;
-import com.jadventure.game.items.Storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,6 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+import com.jadventure.game.entities.NPC;
+import com.jadventure.game.items.Storage;
+
 /** NpcRepository is the repository for all npcs 
  * instead of new Npc(npcId) use 
  * NpcRepository npcRepository = NpcRepository.createRepo();
@@ -24,7 +25,8 @@ import java.util.Map;
 public class NpcRepository {
     private Map<String,NPC> npcMap = new HashMap<String,NPC>();
     static String fileName = "json/original_data/npcs.json";
-    
+    private static NpcRepository npcRepository = null;
+
     // Load all items, from the given file
     protected void load(File repo) {
         try {
@@ -101,7 +103,6 @@ public class NpcRepository {
         }
     }
     
-    private static NpcRepository npcRepository = null;
     public static NpcRepository createRepo() {
         if ( npcRepository == null) {
             File dataFile = new File(fileName);

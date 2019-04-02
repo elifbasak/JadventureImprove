@@ -55,6 +55,8 @@ public class CommandParser {
 
         // descendingKeySet otherwise startsWith will return correspond to longer command
         // e.g. 'de' will match startWith('d')
+        
+        //	commandMap.
         for (String key : commandMap.descendingKeySet()) {
             if (command.startsWith(key)) {
                 Method method = commandMap.get(key);
