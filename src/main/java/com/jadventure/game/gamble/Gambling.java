@@ -6,7 +6,10 @@ import com.jadventure.game.entities.Entity;
 import com.jadventure.game.entities.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
 import com.jadventure.game.menus.MenuItem;
 import com.jadventure.game.menus.Menus;
 
@@ -55,7 +58,7 @@ public class Gambling {
 		player.setGold(player.getGold() - bet);
 
 
-        String number = "1234";
+        String number = getRandomNumber();
 		QueueProvider.offer("I have a number with 4 distinct digits. Predict it. I will give you hints later.");
 		QueueProvider.offer("If you find the number at most 8 trying, you'll get the money!");
 
@@ -112,5 +115,29 @@ public class Gambling {
             for (int j = 0; j < 4; j++)
                 if (input.charAt(i) == input.charAt(j) && i != j)
                     throw new IllegalArgumentException();
+    }
+
+    private String getRandomNumber() {
+        HashSet<Integer> set = new HashSet<Integer>();
+        int i;
+        String number = "";
+        while (set.size() != 4) {
+            i = (int)(Math.random() * 10);
+            if (!set.contains(i))
+                set.add(i);
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        Iterator iter = set.iterator();
+
+        while(iter.hasNext())
+            list.add((int)iter.next());
+        
+        do {
+            Collections.shuffle(list);
+        } while(list.get(0) == 0);
+
+        for (int j = 0; j < 4; j++)
+            number += list.get(j);
+        return number;
     }
 }
