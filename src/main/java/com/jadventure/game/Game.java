@@ -45,15 +45,42 @@ public class Game {
      * character and welcomes him / her. After that, it goes to the normal game prompt.
      */
     public void newGameStart(Player player) throws DeathException {
+    	String input="";
+    	boolean flag=true;
+    	
         QueueProvider.offer(player.getIntro());
         String userInput = QueueProvider.take();
-        player.setName(userInput);
-        LocationRepository locationRepo = GameBeans.getLocationRepository(player.getName());
-        this.player.setLocation(locationRepo.getInitialLocation());
-        player.save();
-        QueueProvider.offer("Welcome to Silliya, " + player.getName() + ".");
-        player.getLocation().print();
-        gamePrompt(player);
+        if(player.profileExists(userInput)) {
+        	QueueProvider.offer("Hmm.. I can recognize you, this is not your first time in Silliya " + userInput +".\nYou can continue your adventure [1] or create another one [2].");
+        	input=QueueProvider.take();
+        }
+        
+        while(flag){
+        if(input.equals("1")) {
+        	QueueProvider.offer("Welcome back, " + player.getName() + "!");
+            QueueProvider.offer("");
+            player.getLocation().print();
+            flag=false;
+            gamePrompt(player);
+
+        }
+        
+        if(input.equals("2")) {
+	        player.setName(userInput);
+	        LocationRepository locationRepo = GameBeans.getLocationRepository(player.getName());
+	        this.player.setLocation(locationRepo.getInitialLocation());
+	        player.save();
+	        QueueProvider.offer("Welcome to Silliya, " + player.getName() + ".");
+	        player.getLocation().print();
+	        flag=false;
+	        gamePrompt(player);
+        }
+        else {
+        	QueueProvider.offer("It is not a valid option. Enter 1 for old one or 2 for new one.");
+        	input=QueueProvider.take();
+        }
+        
+        }
     }
 
     /**

@@ -75,7 +75,6 @@ public class BattleMenu extends Menus {
             }
 
             this.player.getLocation().remove(opponent);
-            this.player.getLocation().removeMonster((Monster)opponent);
             this.player.setGold(this.player.getGold() + opponent.getGold());
             QueueProvider.offer("You killed a " + opponent.getName() +
                     "\nYou have gained " + xp + " XP and " +
