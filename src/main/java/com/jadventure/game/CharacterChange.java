@@ -60,7 +60,7 @@ public class CharacterChange {
     }
 
     public void checkForCharacterChange(Player player) {
-        HashMap<String, Integer> characterLevels = player.getCharacterLevels();
+        Map<String, Integer> characterLevels = player.getCharacterLevels();
         String currentCharacter = player.getCurrentCharacterType();
         int highestCharacterLevel = player.getCharacterLevel(currentCharacter);
         String highestCharacter = currentCharacter;

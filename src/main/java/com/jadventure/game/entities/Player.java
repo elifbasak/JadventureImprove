@@ -56,7 +56,7 @@ public class Player extends Entity {
     private int xp;
     /** Player type */
     private String type;
-    private static HashMap<String, Integer>characterLevels = new HashMap<String, Integer>();
+    private static Map<String, Integer>characterLevels = new HashMap<String, Integer>();
 
     public Player() {
     }
@@ -68,11 +68,11 @@ public class Player extends Entity {
         characterLevels.put("Brotherhood Member", 4);
     }
 
-    public HashMap<String, Integer> getCharacterLevels() {
+    public Map<String, Integer> getCharacterLevels() {
         return characterLevels;
     }
 
-    public void setCharacterLevels(HashMap<String, Integer> newCharacterLevels) {
+    public void setCharacterLevels(Map<String, Integer> newCharacterLevels) {
         this.characterLevels = newCharacterLevels;
     }
 
@@ -122,7 +122,7 @@ public class Player extends Entity {
             player.setLuck(json.get("luck").getAsInt());
             player.setStealth(json.get("stealth").getAsInt());
             player.setCurrentCharacterType(json.get("type").getAsString());
-            HashMap<String, Integer> charLevels = new Gson().fromJson(json.get("types"), new TypeToken<HashMap<String, Integer>>(){}.getType());
+            Map<String, Integer> charLevels = new Gson().fromJson(json.get("types"), new TypeToken<HashMap<String, Integer>>(){}.getType());
             player.setCharacterLevels(charLevels);
             if (json.has("equipment")) {
                 Map<String, EquipmentLocation> locations = new HashMap<>();
@@ -146,8 +146,8 @@ public class Player extends Entity {
                player.setEquipment(equipmentMap);
             }
             if (json.has("items")) {
-                HashMap<String, Integer> items = new Gson().fromJson(json.get("items"), new TypeToken<HashMap<String, Integer>>(){}.getType());
-                ArrayList<ItemStack> itemList = new ArrayList<>();
+                Map<String, Integer> items = new Gson().fromJson(json.get("items"), new TypeToken<HashMap<String, Integer>>(){}.getType());
+                List<ItemStack> itemList = new ArrayList<>();
                 for (Map.Entry<String, Integer> entry : items.entrySet()) {
                     String itemID = entry.getKey();
                     int amount = entry.getValue();
@@ -283,7 +283,7 @@ public class Player extends Entity {
         jsonObject.addProperty("stealth", getStealth());
         jsonObject.addProperty("weapon", getWeapon());
         jsonObject.addProperty("type", getCurrentCharacterType());
-        HashMap<String, Integer> items = new HashMap<String, Integer>();
+        Map<String, Integer> items = new HashMap<String, Integer>();
         for (ItemStack item : getStorage().getItemStack()) {
             items.put(item.getItem().getId(), item.getAmount());
         }
