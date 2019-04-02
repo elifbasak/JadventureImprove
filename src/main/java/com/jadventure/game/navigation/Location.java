@@ -157,7 +157,14 @@ public class Location implements ILocation {
         }
     }
     
+    public void cleanUpMonster(List<Monster> monsters) {
+    	for (Monster monster:monsters)
+    		if(monster.getHealth()==0)
+    			removeMonster(monster);	
+    }
+    
     public List<Monster> getMonsters() {
+    	cleanUpMonster(monsters);
         return monsters;
     }
 

@@ -344,6 +344,7 @@ public class Player extends Entity {
         return storage.search(itemName);
     }
     
+    
     public List<Item> searchEquipment(String itemName, Map<EquipmentLocation, Item> equipment) {
         List<Item> items = new ArrayList<>();
         for (Item item : equipment.values()) {
@@ -354,7 +355,7 @@ public class Player extends Entity {
         return items;
     }
 
-    public void pickUpItem(String itemName) {
+    public void pickUpItem(String itemName) {	
         if (itemName.equals("*")) {
             for (Item item : getLocation().getItems()) {
                 addItemToStorage(item);
@@ -363,13 +364,15 @@ public class Player extends Entity {
             }
             return;
         }
-        List<Item> items = searchItem(itemName, getLocation().getItems());
+
+        List <Item>items = searchItem(itemName, getLocation().getItems());
         if (! items.isEmpty()) {
             Item item = items.get(0);
             addItemToStorage(item);
             location.removeItem(item);
             QueueProvider.offer(item.getName()+ " picked up");
         }
+
     }
 
     public void dropItem(String itemName) {
