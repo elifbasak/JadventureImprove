@@ -51,16 +51,18 @@ public class Game {
         QueueProvider.offer(player.getIntro());
         String userInput = QueueProvider.take();
         if(player.profileExists(userInput)) {
-        	QueueProvider.offer("Hmm.. I can recognize you, this is not your first time in Silliya " + userInput +".\nDo you want to remove existing adventure and create another one?[y]");
+        	QueueProvider.offer("Hmm.. I can recognize you, this is not your first time in Silliya " + userInput 
+        			+".\nDo you want to remove existing adventure and create another one?[y]");
         	input=QueueProvider.take();
 
-        if(!input.equals("y"))
+        if(!input.equalsIgnoreCase("y"))
         	return;
         }
 	        player.setName(userInput);
 	        LocationRepository locationRepo = GameBeans.getLocationRepository(player.getName());
 	        this.player.setLocation(locationRepo.getInitialLocation());
-	        new PlayerUtil().save();
+	        PlayerUtil forsave = new PlayerUtil();
+	        forsave.save();
 	        QueueProvider.offer("Welcome to Silliya, " + player.getName() + ".");
 	        player.getLocation().print();
 	        gamePrompt(player);
