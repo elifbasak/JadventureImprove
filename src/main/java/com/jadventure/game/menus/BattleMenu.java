@@ -193,10 +193,10 @@ public class BattleMenu extends Menus {
         int healthReduction = (int) ((((3 * attacker.getLevel() / 50 + 2) *
                 damage * damage / (defender.getArmour() + 1)/ 100) + 2) *
                 (random.nextDouble() + 1));
+        if(healthReduction>defender.getHealth())
+        	healthReduction=defender.getHealth();
         defender.setHealth((defender.getHealth() - healthReduction));
-        if (defender.getHealth() < 0) {
-            defender.setHealth(0);
-        }
+        
         QueueProvider.offer(healthReduction + " damage dealt!");
         if (attacker instanceof Player) {
             QueueProvider.offer("The " + defender.getName() + "'s health is " +
