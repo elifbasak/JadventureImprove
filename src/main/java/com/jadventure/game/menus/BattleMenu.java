@@ -24,7 +24,7 @@ public class BattleMenu extends Menus {
     private NPC opponent;
     private Player player;
     private Random random;
-    private int armour;
+    private double armour;
     private double damage;
     private int escapeSuccessfulAttempts = 0;
 
@@ -96,7 +96,8 @@ public class BattleMenu extends Menus {
             item.getValue().repair();   
             }
            
-                QueueProvider.offer("You've are now level " + newLevel + "!\n All items are repaired !");
+                QueueProvider.offer("You've are now level " + newLevel
+                		+ "!\n All items are repaired !\n");
             }
             CharacterChange cc = new CharacterChange();
             cc.trigger(this.player, "kill", opponent.getName());
@@ -123,7 +124,6 @@ public class BattleMenu extends Menus {
             case "attack": {
                    mutateStats(1, 0.5);
                    attack(player, opponent);
-                  // player.getEquipment().get("hand").decreaseUsage();
                    attack(opponent, player);
                    resetStats();
                    break;
@@ -250,6 +250,7 @@ public class BattleMenu extends Menus {
             if(bothHands != null) {
             	attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS).decreaseUsage();
             }
+            
             Item leftHand = attacker.getEquipment().get(EquipmentLocation.LEFT_HAND);
             if(leftHand != null) {
             	attacker.getEquipment().get(EquipmentLocation.LEFT_HAND).decreaseUsage();

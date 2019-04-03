@@ -33,7 +33,7 @@ public abstract class Entity {
     private int gold;
     private double damage = 30;
     private double critChance = 0.0;
-    private int armour;
+    private double armour;
     private String weapon = "hands";
     private Map<EquipmentLocation, Item> equipment;
     protected Storage storage;
@@ -92,11 +92,11 @@ public abstract class Entity {
         this.critChance = critChance;
     }
 
-    public int getArmour() {
+    public double getArmour() {
         return armour;
     }
 
-    public void setArmour(int armour) {
+    public void setArmour(double armour) {
         this.armour = armour;
     }
 
@@ -189,7 +189,7 @@ public abstract class Entity {
 
     public Map<String, String> equipItem(EquipmentLocation place, Item item) {
         double oldDamage = this.damage;
-        int oldArmour = this.armour;
+        double oldArmour = this.armour;
         if (place == null) {
             place = item.getPosition();
         }
@@ -222,7 +222,7 @@ public abstract class Entity {
             }
             case 'a': {
                 this.armour += item.getProperty("armour")*item.getUsage();
-                int diffArmour = this.armour - oldArmour;
+                double diffArmour = this.armour - oldArmour;
                 result.put("armour", String.valueOf(diffArmour));
                 break;
             }
@@ -286,9 +286,9 @@ public abstract class Entity {
             result.put("damage", String.valueOf(diffDamage));
         } 
         if (item.containsProperty("armour")) {
-            int oldArmour = armour;
+            double oldArmour = armour;
             armour -= item.getProperty("armour")*item.getUsage();
-            int diffArmour = armour - oldArmour;
+            double diffArmour = armour - oldArmour;
             result.put("armour", String.valueOf(diffArmour));
         }
         return result;

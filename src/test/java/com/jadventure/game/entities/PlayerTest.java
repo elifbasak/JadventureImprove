@@ -17,17 +17,17 @@ public class PlayerTest {
     @Test
     public void newRecruit() {
         Player player = Player.getInstance("recruit");
-        int expected = 1;
-        int actual = player.getArmour();
-        assertEquals("Failure - new recruit not properly created", expected, actual);
+        double expected = 1.0;
+        double actual = player.getArmour();
+        assertEquals("Failure - new recruit not properly created", expected, actual, 0.01);
     }
 
     @Test
     public void newSewerRat() {
         Player player = Player.getInstance("sewerrat");
-        int expected = 0;
-        int actual = player.getArmour();
-        assertEquals("Failure - new sewer rat not properly created", expected, actual);
+        double expected = 0;
+        double actual = player.getArmour();
+        assertEquals("Failure - new sewer rat not properly created", expected, actual, 0.01);
     }
 
     @Test

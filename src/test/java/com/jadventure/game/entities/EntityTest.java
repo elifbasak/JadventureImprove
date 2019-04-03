@@ -64,7 +64,7 @@ public class EntityTest {
         entity.setGold(10);
         assertEquals(entity.getGold(), 10);
         entity.setArmour(20);
-        assertEquals(entity.getArmour(), 20);
+        assertEquals(entity.getArmour(), 20.0, 0.01);
         entity.setHealthMax(30);
         assertEquals(entity.getHealthMax(), 30);
         assertTrue(entity.getHealth() <= entity.getHealthMax());
@@ -96,7 +96,7 @@ public class EntityTest {
 
         assertEquals("wshi1", entity.getWeapon());
         assertEquals(diffDamage, newDamage - oldDamage, 0.2);
-
+        
         Map<EquipmentLocation, Item> equipment = entity.getEquipment();
         assertEquals(item, equipment.get(EquipmentLocation.RIGHT_HAND));
     }
@@ -176,14 +176,14 @@ public class EntityTest {
     @Test
     public void testEquipItem_ArmourSingleLocation() {
         ItemRepository itemRepo = GameBeans.getItemRepository();
-        int oldArmour = entity.getArmour();
+        double oldArmour = entity.getArmour();
         Item item = itemRepo.getItem("ashi1");
         Map<String, String> result = entity.equipItem(EquipmentLocation.LEFT_HAND, item);
         assertNotNull(result.get("armour"));
-        int newArmour = entity.getArmour();
-        int diffArmour = Integer.parseInt(result.get("armour"));
+        double newArmour = entity.getArmour();
+        double diffArmour = Double.parseDouble(result.get("armour"));
 
-        assertEquals(diffArmour, newArmour - oldArmour);
+        assertEquals(diffArmour, newArmour - oldArmour, 0.01);
         Map<EquipmentLocation, Item> equipment = entity.getEquipment();
         assertEquals(item, equipment.get(EquipmentLocation.LEFT_HAND));
     }
@@ -191,15 +191,15 @@ public class EntityTest {
     @Test
     public void testUnequipItem_ArmourSingleLocation() {
         ItemRepository itemRepo = GameBeans.getItemRepository();
-        int oldArmour = entity.getArmour();
+        double oldArmour = entity.getArmour();
         Item item = itemRepo.getItem("ashi1");
         Map<String, String> result = entity.unequipItem(item);
         assertNotNull(result.get("armour"));
-        int newArmour = entity.getArmour();
-        int diffArmour = Integer.parseInt(result.get("armour"));
+        double newArmour = entity.getArmour();
+        double diffArmour = Double.parseDouble(result.get("armour"));
 
         assertEquals("hands", entity.getWeapon());
-        assertEquals(diffArmour, newArmour - oldArmour);
+        assertEquals(diffArmour, newArmour - oldArmour, 0.01);
 
         Map<EquipmentLocation, Item> equipment = entity.getEquipment();
         assertNull(equipment.get(EquipmentLocation.LEFT_HAND));
@@ -208,14 +208,14 @@ public class EntityTest {
     @Test
     public void testEquipItem_ArmourDoubleLocation() {
         ItemRepository itemRepo = GameBeans.getItemRepository();
-        int oldArmour = entity.getArmour();
+        double oldArmour = entity.getArmour();
         Item item = itemRepo.getItem("algt1");
         Map<String, String> result = entity.equipItem(item.getPosition(), item);
         assertNotNull(result.get("armour"));
-        int newArmour = entity.getArmour();
-        int diffArmour = Integer.parseInt(result.get("armour"));
+        double newArmour = entity.getArmour();
+        double diffArmour = Double.parseDouble(result.get("armour"));
 
-        assertEquals(diffArmour, newArmour - oldArmour);
+        assertEquals(diffArmour, newArmour - oldArmour, 0.01);
 
         Map<EquipmentLocation, Item> equipment = entity.getEquipment();
         assertEquals(item, equipment.get(EquipmentLocation.BOTH_ARMS));
@@ -226,15 +226,15 @@ public class EntityTest {
     @Test
     public void testUnequipItem_ArmourDoubleLocation() {
         ItemRepository itemRepo = GameBeans.getItemRepository();
-        int oldArmour = entity.getArmour();
+        double oldArmour = entity.getArmour();
         Item item = itemRepo.getItem("algt1");
         Map<String, String> result = entity.unequipItem(item);
         assertNotNull(result.get("armour"));
-        int newArmour = entity.getArmour();
-        int diffArmour = Integer.parseInt(result.get("armour"));
+        double newArmour = entity.getArmour();
+        double diffArmour = Double.parseDouble(result.get("armour"));
 
         assertEquals("hands", entity.getWeapon());
-        assertEquals(diffArmour, newArmour - oldArmour);
+        assertEquals(diffArmour, newArmour - oldArmour , 0.01);
 
         Map<EquipmentLocation, Item> equipment = entity.getEquipment();
         assertEquals(null, equipment.get(EquipmentLocation.BOTH_ARMS));
@@ -244,14 +244,14 @@ public class EntityTest {
     public void testEquipItem_ArmourSingleLocationWithDoubleLocationEquip() {
         ItemRepository itemRepo = GameBeans.getItemRepository();
         entity.equipItem(null, itemRepo.getItem("algt1"));
-        int oldArmour = entity.getArmour();
+        double oldArmour = entity.getArmour();
         Item item = itemRepo.getItem("albr1");
         Map<String, String> result = entity.equipItem(item.getPosition(), item);
         assertNotNull(result.get("armour"));
-        int newArmour = entity.getArmour();
-        int diffArmour = Integer.parseInt(result.get("armour"));
+        double newArmour = entity.getArmour();
+        double diffArmour = Double.parseDouble(result.get("armour"));
 
-        assertEquals(newArmour - oldArmour, diffArmour);
+        assertEquals(newArmour - oldArmour, diffArmour, 0.01);
 
         Map<EquipmentLocation, Item> equipment = entity.getEquipment();
         assertEquals(item, equipment.get(EquipmentLocation.RIGHT_ARM));
