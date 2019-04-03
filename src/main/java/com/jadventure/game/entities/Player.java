@@ -326,6 +326,7 @@ public class Player extends Entity {
             addItemToStorage(item);
             location.removeItem(item);
             QueueProvider.offer(item.getName()+ " picked up");
+            return;
         }
         
         items=getLocation().getItems();
