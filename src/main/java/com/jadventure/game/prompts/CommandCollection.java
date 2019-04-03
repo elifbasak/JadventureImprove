@@ -174,6 +174,15 @@ public enum CommandCollection {
             QueueProvider.offer("That direction doesn't exist");
         }
     }
+    
+    @Command(command="gopick", aliases="gp", description="Goto a direction and pick all items", debug=false)
+    public void command_gp(String arg) throws DeathException {
+    	command_g(arg);
+    	command_p("*");
+    }
+    
+    
+    
 
     @Command(command="inspect", aliases="i", description="Inspect an item", debug=false)
     public void command_i(String arg) {
