@@ -64,7 +64,7 @@ public class Gambling {
 		QueueProvider.offer("I have a number with 4 distinct digits (not beginning with 0). Predict it. I will give you hints later.");
 		QueueProvider.offer("If you find the number at most 8 trying, you'll get the money!");
         QueueProvider.offer("<-- Bulls means digits correct in the right position -->");
-        QueueProvider.offer("<-- Bulls means digits correct but in the wrong position -->");
+        QueueProvider.offer("<-- Cows means digits correct but in the wrong position -->");
 
         while (tries < 8 && bulls != 4) {
             input = QueueProvider.take();
