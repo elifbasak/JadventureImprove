@@ -4,6 +4,7 @@ import com.jadventure.game.DeathException;
 import com.jadventure.game.entities.Entity;
 import com.jadventure.game.entities.EquipmentLocation;
 import com.jadventure.game.entities.Player;
+import com.jadventure.game.entities.PlayerUtil;
 import com.jadventure.game.entities.NPC;
 import com.jadventure.game.monsters.Monster;
 import com.jadventure.game.QueueProvider;
@@ -54,7 +55,7 @@ public class BattleMenu extends Menus {
             	if(reply.equals("n"))
             		throw new DeathException("restart");
             	else if(reply.equals("y")) {
-            		player=Player.load(player.getName());
+            		player=PlayerUtil.load(player.getName());
             		new Game(player,"old");
             	}
             } else if (reply.startsWith("n")) {
