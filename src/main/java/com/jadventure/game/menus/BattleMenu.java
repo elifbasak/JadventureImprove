@@ -94,9 +94,10 @@ public class BattleMenu extends Menus {
             	
            for (Map.Entry<EquipmentLocation, Item> item : this.player.getEquipment().entrySet())            {
             item.getValue().repair();
+            
             }
            
-                QueueProvider.offer("You've are now level " + newLevel + "!");
+                QueueProvider.offer("You've are now level " + newLevel + "!\n All items are repaired !");
             }
             CharacterChange cc = new CharacterChange();
             cc.trigger(this.player, "kill", opponent.getName());
@@ -210,17 +211,7 @@ public class BattleMenu extends Menus {
         QueueProvider.offer(healthReduction + " damage dealt!");
         if (attacker instanceof Player) {
             QueueProvider.offer("The " + defender.getName() + "'s health is " +
-            		defender.getHealth());
-            
-        //    attacker.getWeapon();
-            
-          //  attacker.getEquipment().get(attacker.getWeapon()).decreaseUsage();
-//            QueueProvider.offer();
-          //  attacker.getEquipment().get("weapon");
-            
-            //attacker.getEquipment().get(key)
-            
-            
+            		defender.getHealth());           
         } else {
             QueueProvider.offer("Your health is " + defender.getHealth());
         }
