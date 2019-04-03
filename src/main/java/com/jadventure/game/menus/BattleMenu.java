@@ -92,9 +92,8 @@ public class BattleMenu extends Menus {
                     opponent.getGold() + " gold");
             if (oldLevel < newLevel) {
             	
-           for (Map.Entry<EquipmentLocation, Item> item : this.player.getEquipment().entrySet())            {
-            item.getValue().repair();
-            
+           for (Map.Entry<EquipmentLocation, Item> item : this.player.getEquipment().entrySet())  {
+            item.getValue().repair();   
             }
            
                 QueueProvider.offer("You've are now level " + newLevel + "!\n All items are repaired !");
@@ -122,6 +121,7 @@ public class BattleMenu extends Menus {
             case "attack": {
                    mutateStats(1, 0.5);
                    attack(player, opponent);
+                  // player.getEquipment().get("hand").decreaseUsage();
                    attack(opponent, player);
                    resetStats();
                    break;
@@ -211,7 +211,31 @@ public class BattleMenu extends Menus {
         QueueProvider.offer(healthReduction + " damage dealt!");
         if (attacker instanceof Player) {
             QueueProvider.offer("The " + defender.getName() + "'s health is " +
-            		defender.getHealth());           
+            		defender.getHealth());
+            
+            Item bothHands = attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS);
+            if(bothHands != null) {
+            	attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS).decreaseUsage();
+               // QueueProvider.offer("both hand"+attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS).getUsage());
+
+            }
+            Item leftHand = attacker.getEquipment().get(EquipmentLocation.LEFT_HAND);
+            if(leftHand != null) {
+            	attacker.getEquipment().get(EquipmentLocation.LEFT_HAND).decreaseUsage();
+             //   QueueProvider.offer("left hand"+attacker.getEquipment().get(EquipmentLocation.LEFT_HAND).getUsage());
+
+            }
+            
+            Item rightHand = attacker.getEquipment().get(EquipmentLocation.RIGHT_HAND);
+
+            if(rightHand != null) {
+            	attacker.getEquipment().get(EquipmentLocation.RIGHT_HAND).decreaseUsage();
+               // QueueProvider.offer("right hand"+attacker.getEquipment().get(EquipmentLocation.RIGHT_HAND).getUsage());
+            }
+
+            
+            
+            
         } else {
             QueueProvider.offer("Your health is " + defender.getHealth());
         }

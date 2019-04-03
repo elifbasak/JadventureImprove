@@ -83,7 +83,7 @@ public class Item {
     }
     public double decreaseUsage() {
     	if(this.usage > 0.25 )
-    		this.usage -=0.05;
+    		this.usage -= 0.005;
     	return usage;
     }
 
