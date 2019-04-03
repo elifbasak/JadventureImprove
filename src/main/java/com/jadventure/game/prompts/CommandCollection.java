@@ -13,6 +13,7 @@ import com.jadventure.game.DeathException;
 import com.jadventure.game.QueueProvider;
 import com.jadventure.game.conversation.ConversationManager;
 import com.jadventure.game.entities.Player;
+import com.jadventure.game.entities.PlayerUtil;
 import com.jadventure.game.entities.NPC;
 import com.jadventure.game.monsters.Monster;
 import com.jadventure.game.monsters.MonsterFactory;
@@ -103,7 +104,7 @@ public enum CommandCollection {
     @Command(command="save", aliases="s", description="Save the game", debug=false)
     public void command_save() {
         logger.info("Command 'save' is running");
-        player.save();
+        new PlayerUtil().save();
     }
 
     @Command(command="monster", aliases="m", description="Monsters around you", debug=false)

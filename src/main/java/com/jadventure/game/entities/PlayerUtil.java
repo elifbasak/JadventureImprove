@@ -121,4 +121,71 @@ public class PlayerUtil {
         return player;
     }
 
+    public void save() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("name",Player.getPlayer(). getName());
+        jsonObject.addProperty("healthMax", Player.getPlayer(). getHealthMax());
+        jsonObject.addProperty("health",Player.getPlayer().  getHealth());
+        jsonObject.addProperty("gold", Player.getPlayer(). getGold());
+        jsonObject.addProperty("armour", Player.getPlayer(). getArmour());
+        jsonObject.addProperty("damage", Player.getPlayer(). getDamage());
+        jsonObject.addProperty("level", Player.getPlayer(). getLevel());
+        jsonObject.addProperty("xp",Player.getPlayer().  getXP());
+        jsonObject.addProperty("strength",Player.getPlayer().  getStrength());
+        jsonObject.addProperty("intelligence", Player.getPlayer(). getIntelligence());
+        jsonObject.addProperty("dexterity", Player.getPlayer(). getDexterity());
+        jsonObject.addProperty("luck", Player.getPlayer(). getLuck());
+        jsonObject.addProperty("stealth", Player.getPlayer(). getStealth());
+        jsonObject.addProperty("weapon",Player.getPlayer().  getWeapon());
+        jsonObject.addProperty("type", Player.getPlayer(). getCurrentCharacterType());
+        Map<String, Integer> items = new HashMap<String, Integer>();
+        for (ItemStack item :Player.getPlayer().getStorage().getItemStack()) {
+            items.put(item.getItem().getId(), item.getAmount());
+        }
+        JsonElement itemsJsonObj = gson.toJsonTree(items);
+        jsonObject.add("items", itemsJsonObj);
+        Map<EquipmentLocation, String> locations = new HashMap<>();
+        locations.put(EquipmentLocation.HEAD, "head");
+        locations.put(EquipmentLocation.CHEST, "chest");
+        locations.put(EquipmentLocation.LEFT_ARM, "leftArm");
+        locations.put(EquipmentLocation.LEFT_HAND, "leftHand");
+        locations.put(EquipmentLocation.RIGHT_ARM, "rightArm");
+        locations.put(EquipmentLocation.RIGHT_HAND, "rightHand");
+        locations.put(EquipmentLocation.BOTH_HANDS, "BothHands");
+        locations.put(EquipmentLocation.BOTH_ARMS, "bothArms");
+        locations.put(EquipmentLocation.LEGS, "legs");
+        locations.put(EquipmentLocation.FEET, "feet");
+        Map<String, String> equipment ;
+        equipment = new HashMap<>();
+        Item hands = GameBeans.getItemRepository().getItem("hands");
+        for (Map.Entry<EquipmentLocation, Item> item :  Player.getPlayer().getEquipment().entrySet()) {
+            if (item.getKey() != null && !hands.equals(item.getValue()) && item.getValue() != null) {
+                equipment.put(locations.get(item.getKey()), item.getValue().getId());
+            }
+        }
+        JsonElement equipmentJsonObj = gson.toJsonTree(equipment);
+        jsonObject.add("equipment", equipmentJsonObj);
+        JsonElement typesJsonObj = gson.toJsonTree( Player.getPlayer().getCharacterLevels());
+        jsonObject.add("types", typesJsonObj);
+        Coordinate coordinate =  Player.getPlayer().getLocation().getCoordinate();
+        String coordinateLocation = coordinate.x+","+coordinate.y+","+coordinate.z;
+        jsonObject.addProperty("location", coordinateLocation);
+
+        String fileName =Player.getPlayer(). getProfileFileName(Player.getPlayer().getName());
+        new File(fileName).getParentFile().mkdirs();
+        try {
+            Writer writer = new FileWriter(fileName);
+            gson.toJson(jsonObject, writer);
+            writer.close();
+            //locationRepo = GameBeans.getLocationRepository(Player.getPlayer().getName());
+            Player.setLocRepo(GameBeans.getLocationRepository( Player.getPlayer().getName()));
+            //locationRepo.writeLocations();
+            Player.getLocRepo().writeLocations();
+            QueueProvider.offer("\nYour game data was saved.");
+        } catch (IOException ex) {
+            QueueProvider.offer("\nUnable to save to file '" + fileName + "'.");
+        }
+    }
+
 }

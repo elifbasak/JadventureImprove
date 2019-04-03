@@ -1,6 +1,7 @@
 package com.jadventure.game;
 
 import com.jadventure.game.entities.Player;
+import com.jadventure.game.entities.PlayerUtil;
 import com.jadventure.game.monsters.Monster;
 import com.jadventure.game.monsters.MonsterFactory;
 import com.jadventure.game.repository.LocationRepository;
@@ -59,7 +60,7 @@ public class Game {
 	        player.setName(userInput);
 	        LocationRepository locationRepo = GameBeans.getLocationRepository(player.getName());
 	        this.player.setLocation(locationRepo.getInitialLocation());
-	        player.save();
+	        new PlayerUtil().save();
 	        QueueProvider.offer("Welcome to Silliya, " + player.getName() + ".");
 	        player.getLocation().print();
 	        gamePrompt(player);
