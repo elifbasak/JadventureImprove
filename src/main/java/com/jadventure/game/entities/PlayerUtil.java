@@ -59,8 +59,8 @@ public class PlayerUtil {
             player.setHealthMax(json.get("healthMax").getAsInt());
             player.setHealth(json.get("health").getAsInt());
             player.setGold(json.get("gold").getAsInt());
-            player.setArmour(json.get("armour").getAsInt());
-            player.setDamage(json.get("damage").getAsInt());
+            player.setArmour(json.get("armour").getAsDouble());
+            player.setDamage(json.get("damage").getAsDouble());
             player.setLevel(json.get("level").getAsInt());
             player.setXP(json.get("xp").getAsInt());
             player.setStrength(json.get("strength").getAsInt());
