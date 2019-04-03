@@ -247,21 +247,24 @@ public class Player extends Entity {
         String weaponName = weapon.getName();
         if (weaponName.equals(null)) {
             weaponName = "hands";
-        }
-        String message = "\nPlayer name: " + getName();
-              message += "\nType: " + type;
-              message += "\nCurrent weapon: " + weaponName;
-              message += "\nGold: " + getGold();
-              message += "\nHealth/Max: " + getHealth() + "/" + getHealthMax();
-              message += "\nDamage/Armour: " + getDamage() + "/" + getArmour();
-              message += "\nStrength: " + getStrength();
-              message += "\nIntelligence: " + getIntelligence();
-              message += "\nDexterity: " + getDexterity();
-              message += "\nLuck: " + getLuck();
-              message += "\nStealth: " + getStealth();
-              message += "\nXP: " + getXP();
-              message += "\n" + getName() + "'s level: " + getLevel();
-        QueueProvider.offer(message);
+        } 
+        StringBuilder msg = new StringBuilder();
+        			msg.append( "\nPlayer name: " + getName()
+        					+ "\nType: " + type 
+        				+  "\nCurrent weapon: " + weaponName
+        				+ "\nGold: " + getGold()
+        				+ "\nHealth/Max: " + getHealth() + "/" + getHealthMax() 
+        				+ "\nDamage/Armour: " + getDamage() + "/" + getArmour()
+        				+ "\nStrength: " + getStrength()
+        				+ "\nIntelligence: " + getIntelligence()
+        				+ "\nDexterity: " + getDexterity()
+        				+ "\nLuck: " + getLuck()
+        				+ "\nStealth: " + getStealth()
+        				+ "\nXP: " + getXP()	
+        				+ "\n" + getName() + "'s level: " + getLevel()	
+        					);
+        			
+        QueueProvider.offer(msg.toString());
     }
 
     public void printBackPack() {
@@ -507,20 +510,25 @@ public class Player extends Entity {
     }
 
     public void attack(String opponentName) throws DeathException {
+    	
         Monster monsterOpponent = null;
         NPC npcOpponent = null;
         List<Monster> monsters = getLocation().getMonsters();
+        
         List<NPC> npcs = getLocation().getNpcs();
-        for (int i = 0; i < monsters.size(); i++) {
-             if (monsters.get(i).monsterType.equalsIgnoreCase(opponentName)) {
-                 monsterOpponent = monsters.get(i);
-             }
+        
+        
+       for (Monster single : monsters) {
+    	   if(single.monsterType.equalsIgnoreCase(opponentName))
+    		   monsterOpponent = single;
+		
+	}
+        
+        for (NPC npc : npcs) {
+        if(npc.getName().equalsIgnoreCase(opponentName))
+        	npcOpponent = npc;
         }
-        for (int i=0; i < npcs.size(); i++) {
-            if (npcs.get(i).getName().equalsIgnoreCase(opponentName)) {
-                npcOpponent = npcs.get(i);
-            }
-        }
+        
         if (monsterOpponent != null) {
             monsterOpponent.setName(monsterOpponent.monsterType);
             new BattleMenu(monsterOpponent, this);
