@@ -215,13 +215,13 @@ public abstract class Entity {
         switch (item.getId().charAt(0)) {
             case 'w': {
                 this.weapon = item.getId();
-                this.damage += item.getProperty("damage"); //* item.getUsage() ; // *
+                this.damage += item.getProperty("damage")*item.getUsage();
                 double diffDamage = this.damage - oldDamage;
                 result.put("damage", String.valueOf(diffDamage));
                 break;
             }
             case 'a': {
-                this.armour += item.getProperty("armour");
+                this.armour += item.getProperty("armour")*item.getUsage();
                 int diffArmour = this.armour - oldArmour;
                 result.put("armour", String.valueOf(diffArmour));
                 break;
@@ -281,13 +281,13 @@ public abstract class Entity {
         if (item.containsProperty("damage")) {
             double oldDamage = damage;
             weapon = "hands";
-            damage -= item.getProperty("damage");
+            damage -= item.getProperty("damage")*item.getUsage();
             double diffDamage = damage - oldDamage;
             result.put("damage", String.valueOf(diffDamage));
         } 
         if (item.containsProperty("armour")) {
             int oldArmour = armour;
-            armour -= item.getProperty("armour");
+            armour -= item.getProperty("armour")*item.getUsage();
             int diffArmour = armour - oldArmour;
             result.put("armour", String.valueOf(diffArmour));
         }
