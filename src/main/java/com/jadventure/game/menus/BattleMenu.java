@@ -216,13 +216,10 @@ public class BattleMenu extends Menus {
             Item bothHands = attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS);
             if(bothHands != null) {
             	attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS).decreaseUsage();
-               // QueueProvider.offer("both hand"+attacker.getEquipment().get(EquipmentLocation.BOTH_HANDS).getUsage());
-
             }
             Item leftHand = attacker.getEquipment().get(EquipmentLocation.LEFT_HAND);
             if(leftHand != null) {
             	attacker.getEquipment().get(EquipmentLocation.LEFT_HAND).decreaseUsage();
-             //   QueueProvider.offer("left hand"+attacker.getEquipment().get(EquipmentLocation.LEFT_HAND).getUsage());
 
             }
             
@@ -230,7 +227,6 @@ public class BattleMenu extends Menus {
 
             if(rightHand != null) {
             	attacker.getEquipment().get(EquipmentLocation.RIGHT_HAND).decreaseUsage();
-               // QueueProvider.offer("right hand"+attacker.getEquipment().get(EquipmentLocation.RIGHT_HAND).getUsage());
             }
 
             
