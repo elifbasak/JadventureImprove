@@ -211,7 +211,10 @@ public class BattleMenu extends Menus {
             QueueProvider.offer("The " + defender.getName() + "'s health is " +
             		defender.getHealth());
             
+            attacker.getWeapon();
             
+            attacker.getEquipment().get(attacker.getWeapon()).decreaseUsage();
+//            QueueProvider.offer();
           //  attacker.getEquipment().get("weapon");
             
             //attacker.getEquipment().get(key)
