@@ -462,19 +462,17 @@ public class Player extends Entity {
         Monster monsterOpponent = null;
         NPC npcOpponent = null;
         List<Monster> monsters = getLocation().getMonsters();
-        
         List<NPC> npcs = getLocation().getNpcs();
-        
-        
+                
        for (Monster single : monsters) {
     	   if(single.monsterType.equalsIgnoreCase(opponentName))
     		   monsterOpponent = single;
 		
-	}
-        
+	}    
+       
         for (NPC npc : npcs) {
-        if(npc.getName().equalsIgnoreCase(opponentName))
-        	npcOpponent = npc;
+        	if(npc.getName().equalsIgnoreCase(opponentName))
+        		npcOpponent = npc;
         }
         
         if (monsterOpponent != null) {

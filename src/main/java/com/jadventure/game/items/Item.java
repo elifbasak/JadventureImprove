@@ -18,7 +18,8 @@ public class Item {
     private final EquipmentLocation position;
     private final int level;
     private final Map<String, Integer> properties;
-
+    private double usage = 1.0;
+    
     public Item(String id, String type, String name, String description, int level, Map<String, Integer> properties) {
         this(id, type, name, description, null, level, properties);
     }
@@ -72,10 +73,29 @@ public class Item {
         if (! properties.containsKey(property)) {
             return 0;
         }
+        
 
         return properties.get(property);
     }
+    
+    public double getUsage() {
+    	return usage;
+    }
+    public double decreaseUsage() {
+    	if(this.usage > 0.25 )
+    		this.usage -=0.05;
+    	return usage;
+    }
 
+    public void repair() {
+    	this.usage = 1.0 ;
+    }
+    
+    public void setUsage(double usg) {
+    	this.usage = usg;
+    }
+    
+    
     public Map<String, Integer> getProperties() {
         return Collections.unmodifiableMap(properties);
     }

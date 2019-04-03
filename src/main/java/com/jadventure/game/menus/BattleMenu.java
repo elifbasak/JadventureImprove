@@ -2,6 +2,7 @@ package com.jadventure.game.menus;
 
 import com.jadventure.game.DeathException;
 import com.jadventure.game.entities.Entity;
+import com.jadventure.game.entities.EquipmentLocation;
 import com.jadventure.game.entities.Player;
 import com.jadventure.game.entities.NPC;
 import com.jadventure.game.monsters.Monster;
@@ -13,6 +14,7 @@ import com.jadventure.game.GameBeans;
 
 import java.util.Random;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 
 public class BattleMenu extends Menus {
@@ -80,6 +82,11 @@ public class BattleMenu extends Menus {
                     "\nYou have gained " + xp + " XP and " +
                     opponent.getGold() + " gold");
             if (oldLevel < newLevel) {
+            	
+           for (Map.Entry<EquipmentLocation, Item> item : this.player.getEquipment().entrySet())            {
+            item.getValue().repair();
+            }
+           
                 QueueProvider.offer("You've are now level " + newLevel + "!");
             }
             CharacterChange cc = new CharacterChange();
@@ -186,10 +193,10 @@ public class BattleMenu extends Menus {
         int healthReduction = (int) ((((3 * attacker.getLevel() / 50 + 2) *
                 damage * damage / (defender.getArmour() + 1)/ 100) + 2) *
                 (random.nextDouble() + 1));
+        if(healthReduction>defender.getHealth())
+        	healthReduction=defender.getHealth();
         defender.setHealth((defender.getHealth() - healthReduction));
-        if (defender.getHealth() < 0) {
-            defender.setHealth(0);
-        }
+        
         QueueProvider.offer(healthReduction + " damage dealt!");
         if (attacker instanceof Player) {
             QueueProvider.offer("The " + defender.getName() + "'s health is " +
