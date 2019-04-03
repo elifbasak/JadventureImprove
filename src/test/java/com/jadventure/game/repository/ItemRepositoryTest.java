@@ -55,33 +55,30 @@ public class ItemRepositoryTest {
         assertEquals("Milk in a bottle", milkItem.getDescription());
     }
 
-//    @Test
-//    public void storeItems() throws IOException {
-//        ItemRepository itemRepo = new ItemRepository();
-//        
-//        itemRepo.addItem(createMilk());
-//        itemRepo.addItem(createEgg());
-//
-//        Writer writer = new StringWriter();
-//        JsonWriter jsonWriter = new JsonWriter(writer);
-//        itemRepo.store(jsonWriter);
-//        jsonWriter.flush();
-//        
-//        
-//        String expected = "{\"items\":{"
-//                + "\"egg-1\":{\"id\":\"egg-1\",\"type\":\"food\",\"name\":\"egg\",\"description\":\"A nice egg\","
-//                + "\"level\":1,\"properties\":{\"health\":2,\"value\":3,\"weight\":1}},"
-//                + "\"milk-bottle\":{\"id\":\"milk-bottle\",\"type\":\"potion\",\"name\":\"milk\",\"description\":\"Milk in a bottle\","
-//                + "\"level\":1,\"properties\":{\"health\":5,\"value\":10,\"weight\":1,\"usage\":1.0}}"
-//                + "}}";
-//        String gsonMsg = writer.toString();
-//        assertEquals(expected, gsonMsg);
-//    }
+    @Test
+    public void storeItems() throws IOException {
+        ItemRepository itemRepo = new ItemRepository();
+        
+        itemRepo.addItem(createMilk());
+        itemRepo.addItem(createEgg());
+
+        Writer writer = new StringWriter();
+        JsonWriter jsonWriter = new JsonWriter(writer);
+        itemRepo.store(jsonWriter);
+        jsonWriter.flush();
+        
+        
+        String expected = "{\"items\":{"
+                + "\"egg-1\":{\"id\":\"egg-1\",\"type\":\"food\",\"name\":\"egg\",\"description\":\"A nice egg\","
+                + "\"level\":1,\"properties\":{\"health\":2,\"value\":3,\"weight\":1},\"usage\":1.0},\"milk-bottle\":{\"id\":"
+                + "\"milk-bottle\",\"type\":\"potion\",\"name\":\"milk\",\"description\":"
+                + "\"Milk in a bottle\",\"level\":1,\"properties\":{\"health\":5,\"value\":10,\"weight\":1},\"usage\":1.0}}}";
+        
+        String gsonMsg = writer.toString();
+        System.out.println(gsonMsg);
+        assertEquals(expected, gsonMsg);
+    }
     
-    
-    // ...value":3,"weight":1}[},,"usage":1.0}"milk-bottle":{"id":"milk-bottle","type":"potion","name":"milk","description":"Milk in a bottle","level":1,"properties":{"health":5,"value":10,"weight":1}]}}} 
-    
-//...value":3,"weight":1}[,"usage":1.0},"milk-bottle":{"id":"milk-bottle","type":"potion","name":"milk","description":"Milk in a bottle","level":1,"properties":{"health":5,"value":10,"weight":1},"usage":1.0]}}}
     
     
     @Test
