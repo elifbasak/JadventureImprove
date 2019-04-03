@@ -422,7 +422,7 @@
           "response": [
             2
           ],
-          "action": "none"
+          "action": "gamble"
         },
         {
           "condition": "none",

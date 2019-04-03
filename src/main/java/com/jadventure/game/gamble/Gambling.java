@@ -46,12 +46,14 @@ public class Gambling {
 				bet = Integer.parseInt(input);
 			} catch (Exception e) {
 				QueueProvider.offer("Don't blather!");
-				continue;
+                continue;
 			}
 			if (bet <= 0) {
 				QueueProvider.offer("Don't blather!");
+                continue;
 			} else if (bet > player.getGold()) {
 				QueueProvider.offer("Hahah! I don't see that much money :D");
+                return;
 			}
 			break;
 		}
@@ -59,14 +61,17 @@ public class Gambling {
 
 
         String number = getRandomNumber();
-		QueueProvider.offer("I have a number with 4 distinct digits. Predict it. I will give you hints later.");
+		QueueProvider.offer("I have a number with 4 distinct digits (not beginning with 0). Predict it. I will give you hints later.");
 		QueueProvider.offer("If you find the number at most 8 trying, you'll get the money!");
+        QueueProvider.offer("<-- Bulls means digits correct in the right position -->");
+        QueueProvider.offer("<-- Bulls means digits correct but in the wrong position -->");
 
-        while (tries < 8 || bulls != 4) {
+        while (tries < 8 && bulls != 4) {
             input = QueueProvider.take();
             try {
                 validateInput(input);
             } catch (Exception e) {
+                QueueProvider.offer("<-- Invalid Input -->");
                 continue;
             }
             bulls = getBull(input, number);
@@ -80,7 +85,7 @@ public class Gambling {
             QueueProvider.offer("Congratulations! You have won " + (bet * 2) + " golds!");
             player.setGold(bet * 2);
         } else {
-            QueueProvider.offer("Don't press your luck. Maybe next time.");
+            QueueProvider.offer("Don't press your luck. The number was " + number +". Maybe next time.");
         }
 	}
 
