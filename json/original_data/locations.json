@@ -111,7 +111,8 @@
 	"1,4,0": {
 		"danger": "1",
 		"description": "The road to Silliya",
-		"title": "Road",
+		"title": "Gambler",
+		"npcs": ["gambler"],
 		"locationType": "ROAD",
 		"coordinate": "1,4,0"},
 	"7,2,-1": {
