@@ -94,6 +94,7 @@
     },
     "sewerrat": {
       "name": "Sewer Rat",
+      "gold": 0,
       "health": 100,
       "healthMax": 100,
       "damage": 40,
@@ -339,6 +340,7 @@
     },
     "recruit": {
       "name": "Recruit",
+      "gold": 0,
       "health": 100,
       "healthMax": 100,
       "damage": 50,

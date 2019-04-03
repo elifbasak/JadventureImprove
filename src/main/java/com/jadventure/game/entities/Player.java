@@ -112,6 +112,7 @@ public class Player extends Entity {
             player.setName(json.get("name").getAsString());
             player.setHealthMax(json.get("healthMax").getAsInt());
             player.setHealth(json.get("health").getAsInt());
+            player.setGold(json.get("gold").getAsInt());
             player.setArmour(json.get("armour").getAsInt());
             player.setDamage(json.get("damage").getAsInt());
             player.setLevel(json.get("level").getAsInt());
@@ -192,6 +193,7 @@ public class Player extends Entity {
             player.setName(json.get("name").getAsString());
             player.setHealthMax(json.get("healthMax").getAsInt());
             player.setHealth(json.get("health").getAsInt());
+            player.setGold(json.get("gold").getAsInt());
             player.setArmour(json.get("armour").getAsInt());
             player.setDamage(json.get("damage").getAsInt());
             player.setLevel(json.get("level").getAsInt());
@@ -272,6 +274,7 @@ public class Player extends Entity {
         jsonObject.addProperty("name", getName());
         jsonObject.addProperty("healthMax", getHealthMax());
         jsonObject.addProperty("health", getHealth());
+        jsonObject.addProperty("gold", getGold());
         jsonObject.addProperty("armour", getArmour());
         jsonObject.addProperty("damage", getDamage());
         jsonObject.addProperty("level", getLevel());
