@@ -215,7 +215,7 @@ public abstract class Entity {
         switch (item.getId().charAt(0)) {
             case 'w': {
                 this.weapon = item.getId();
-                this.damage += item.getProperty("damage");
+                this.damage += item.getProperty("damage"); //* item.getUsage() ; // *
                 double diffDamage = this.damage - oldDamage;
                 result.put("damage", String.valueOf(diffDamage));
                 break;

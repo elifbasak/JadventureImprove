@@ -190,6 +190,7 @@ public class BattleMenu extends Menus {
             damage += damage;
             QueueProvider.offer("Crit hit! Damage has been doubled!");
         }
+        
         int healthReduction = (int) ((((3 * attacker.getLevel() / 50 + 2) *
                 damage * damage / (defender.getArmour() + 1)/ 100) + 2) *
                 (random.nextDouble() + 1));
@@ -200,7 +201,14 @@ public class BattleMenu extends Menus {
         QueueProvider.offer(healthReduction + " damage dealt!");
         if (attacker instanceof Player) {
             QueueProvider.offer("The " + defender.getName() + "'s health is " +
-                    defender.getHealth());
+            		defender.getHealth());
+            
+            
+          //  attacker.getEquipment().get("weapon");
+            
+            //attacker.getEquipment().get(key)
+            
+            
         } else {
             QueueProvider.offer("Your health is " + defender.getHealth());
         }

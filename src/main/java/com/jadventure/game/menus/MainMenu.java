@@ -68,6 +68,8 @@ public class MainMenu extends Menus implements Runnable {
         }
         return true;
     }
+    
+    
 
     private static void loadProfileFromMenu() throws DeathException {
         String key;
