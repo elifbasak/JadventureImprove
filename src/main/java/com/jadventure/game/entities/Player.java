@@ -67,6 +67,17 @@ public class Player extends Entity {
         characterLevels.put("Syndicate Member", 4);
         characterLevels.put("Brotherhood Member", 4);
     }
+    public LocationRepository getRepo(){
+    	return locationRepo ;
+    }
+    
+    public  static void setLocRepo(LocationRepository repo){
+    	locationRepo =repo;
+    }
+    public static LocationRepository getLocRepo(){
+    	return locationRepo;
+    }
+    
 
     public Map<String, Integer> getCharacterLevels() {
         return characterLevels;
@@ -102,79 +113,16 @@ public class Player extends Entity {
         return file.exists();
     }
 
-    public static Player load(String name) {
-        player = new Player();
-        JsonParser parser = new JsonParser();
-        String fileName = getProfileFileName(name);
-        try {
-            Reader reader = new FileReader(fileName);
-            JsonObject json = parser.parse(reader).getAsJsonObject();
-            player.setName(json.get("name").getAsString());
-            player.setHealthMax(json.get("healthMax").getAsInt());
-            player.setHealth(json.get("health").getAsInt());
-            player.setGold(json.get("gold").getAsInt());
-            player.setArmour(json.get("armour").getAsInt());
-            player.setDamage(json.get("damage").getAsInt());
-            player.setLevel(json.get("level").getAsInt());
-            player.setXP(json.get("xp").getAsInt());
-            player.setStrength(json.get("strength").getAsInt());
-            player.setIntelligence(json.get("intelligence").getAsInt());
-            player.setDexterity(json.get("dexterity").getAsInt());
-            player.setLuck(json.get("luck").getAsInt());
-            player.setStealth(json.get("stealth").getAsInt());
-            player.setCurrentCharacterType(json.get("type").getAsString());
-            Map<String, Integer> charLevels = new Gson().fromJson(json.get("types"), new TypeToken<HashMap<String, Integer>>(){}.getType());
-            player.setCharacterLevels(charLevels);
-            if (json.has("equipment")) {
-                Map<String, EquipmentLocation> locations = new HashMap<>();
-                locations.put("head", EquipmentLocation.HEAD);
-                locations.put("chest", EquipmentLocation.CHEST);
-                locations.put("leftArm", EquipmentLocation.LEFT_ARM);
-                locations.put("leftHand", EquipmentLocation.LEFT_HAND);
-                locations.put("rightArm", EquipmentLocation.RIGHT_ARM);
-                locations.put("rightHand", EquipmentLocation.RIGHT_HAND);
-                locations.put("bothHands", EquipmentLocation.BOTH_HANDS);
-                locations.put("bothArms", EquipmentLocation.BOTH_ARMS);
-                locations.put("legs", EquipmentLocation.LEGS);
-                locations.put("feet", EquipmentLocation.FEET);
-                HashMap<String, String> equipment = new Gson().fromJson(json.get("equipment"), new TypeToken<HashMap<String, String>>(){}.getType());
-               Map<EquipmentLocation, Item> equipmentMap = new HashMap<>();
-               for(Map.Entry<String, String> entry : equipment.entrySet()) {
-                   EquipmentLocation el = locations.get(entry.getKey());
-                   Item i = itemRepo.getItem(entry.getValue());
-                   equipmentMap.put(el, i);
-               }
-               player.setEquipment(equipmentMap);
-            }
-            if (json.has("items")) {
-                Map<String, Integer> items = new Gson().fromJson(json.get("items"), new TypeToken<HashMap<String, Integer>>(){}.getType());
-                List<ItemStack> itemList = new ArrayList<>();
-                for (Map.Entry<String, Integer> entry : items.entrySet()) {
-                    String itemID = entry.getKey();
-                    int amount = entry.getValue();
-                    Item item = itemRepo.getItem(itemID);
-                    ItemStack itemStack = new ItemStack(amount, item);
-                    itemList.add(itemStack);
-                }
-                float maxWeight = (float)Math.sqrt(player.getStrength()*300);
-                player.setStorage(new Storage(maxWeight, itemList));
-            }
-            Coordinate coordinate = new Coordinate(json.get("location").getAsString());
-            locationRepo = GameBeans.getLocationRepository(player.getName());
-            player.setLocation(locationRepo.getLocation(coordinate));
-            reader.close();
-            setUpCharacterLevels();
-        } catch (FileNotFoundException ex) {
-            QueueProvider.offer( "Unable to open file '" + fileName + "'.");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return player;
-    }
+    
 
     // This is known as the singleton pattern. It allows for only 1 instance of a player.
     private static Player player;
+    public static void resetPlayer(){
+    	player = new Player();
+    }
+    public static Player  getPlayer(){
+    	return player;
+    }
     
     public static Player getInstance(String playerClass){
         player = new Player();

@@ -9,7 +9,7 @@ import com.jadventure.game.GameModeType;
 import com.jadventure.game.JAdventure;
 import com.jadventure.game.QueueProvider;
 import com.jadventure.game.entities.Player;
-
+import com.jadventure.game.entities.PlayerUtil;
 /**
  * The first menu displayed on user screen
  * @see JAdventure
@@ -83,7 +83,7 @@ public class MainMenu extends Menus implements Runnable {
             if (key.equals("exit") || key.equals("back")) {
                 return;
             } else if (Player.profileExists(key)) {
-                player = Player.load(key);
+                player = PlayerUtil.load(key);
             } else {
                 QueueProvider.offer("That user doesn't exist. Try again.");
             }
