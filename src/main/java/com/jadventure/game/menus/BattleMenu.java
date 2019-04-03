@@ -105,13 +105,15 @@ public class BattleMenu extends Menus {
 
     private void buildMenu() {
         this.menuItems.add(new MenuItem("Attack",
-                    "Attack " + opponent.getName() + "."));
+                   "Attack " + opponent.getName() + "."));
         this.menuItems.add(new MenuItem("Defend",
                     "Defend against " + opponent.getName() + "'s attack."));
         this.menuItems.add(new MenuItem("Escape",
                     "Try and escape from " + opponent.getName()));
         this.menuItems.add(new MenuItem("Equip", "Equip an item"));
         this.menuItems.add(new MenuItem("Unequip", "Unequip an item"));
+        this.menuItems.add(new MenuItem("Let the gods decide my faith!", "Can not decide what to do? Pick me.."));
+
         this.menuItems.add(new MenuItem("View",
                     "View details about your character"));
     }
@@ -148,10 +150,41 @@ public class BattleMenu extends Menus {
                   unequip();
                   break;
             }
+            case "let the gods decide my faith!":{
+            	int a = (int) (Math.random()*3+1);
+            	if(a == 1){
+                    QueueProvider.offer("\n Gods decided to attack!");
+
+                    mutateStats(1, 0.5);
+                    attack(player, opponent);
+                     attack(opponent, player);
+                     resetStats();
+                     break;
+            	}
+            	else if (a == 2){
+                    QueueProvider.offer("\n Gods decided to defend!");
+
+                    mutateStats(0.5, 1);
+                    QueueProvider.offer("\nYou get ready to defend against " +
+                            "the " + opponent.getName() + ".");
+                    attack(player, opponent);
+                    attack(opponent, player);
+                    resetStats();
+                    break;
+            	}
+            	else if(a == 3){
+                    QueueProvider.offer("\n Gods decided to escape!");
+                    escapeSuccessfulAttempts = escapeAttempt(player,
+                            opponent, escapeSuccessfulAttempts);
+                break;	
+            	}            	
+            	
+            }
             case "view": {
                   viewStats();
                   break;
             }
+
             default: {
                   break;
             }
