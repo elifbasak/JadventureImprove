@@ -1,7 +1,7 @@
 package com.jadventure.game.entities;
 
 import com.jadventure.game.entities.Player;
-
+import com.jadventure.game.entities.PlayerUtil;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -32,7 +32,7 @@ public class PlayerTest {
 
     @Test
     public void oldPlayer() {
-        Player player = Player.load("test");
+        Player player = PlayerUtil.load("test");
         String expected = "test";
         String actual = player.getName();
         assertEquals("Failure - old player not properly loaded", expected, actual);
