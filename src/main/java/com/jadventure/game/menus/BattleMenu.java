@@ -1,6 +1,6 @@
 package com.jadventure.game.menus;
 
-import com.jadventure.game.DeathException;
+import com.jadventure.game.DeathException; 
 import com.jadventure.game.entities.Entity;
 import com.jadventure.game.entities.Player;
 import com.jadventure.game.entities.NPC;
@@ -10,6 +10,7 @@ import com.jadventure.game.CharacterChange;
 import com.jadventure.game.items.ItemStack;
 import com.jadventure.game.items.Item;
 import com.jadventure.game.GameBeans;
+import com.jadventure.game.Game;
 
 import java.util.Random;
 import java.util.List;
@@ -46,7 +47,14 @@ public class BattleMenu extends Menus {
                 reply = QueueProvider.take().toLowerCase();
             }
             if (reply.startsWith("y")) {
-                throw new DeathException("restart");
+            	QueueProvider.offer("Do you want to start from last saved adventure[y/n]");
+            	reply = QueueProvider.take().toLowerCase();
+            	if(reply.equals("n"))
+            		throw new DeathException("restart");
+            	else if(reply.equals("y")) {
+            		player=Player.load(player.getName());
+            		new Game(player,"old");
+            	}
             } else if (reply.startsWith("n")) {
                 throw new DeathException("close");
             }
