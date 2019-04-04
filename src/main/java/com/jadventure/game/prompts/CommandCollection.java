@@ -181,6 +181,24 @@ public enum CommandCollection {
     	command_p("*");
     }
     
+    @Command(command="gobase", aliases="gb", description="Goto a initial location.(Pay 40gold)", debug=false)
+    public void command_gb(String arg) throws DeathException {
+		QueueProvider.offer("Are you sure? [y/n]");
+String input = QueueProvider.take();
+		if(input.equals("y")) {
+    	if(player.getGold()>=40) {
+    		player.setGold(player.getGold()-40);
+    		QueueProvider.offer("You shall go !");
+
+        LocationRepository locationRepo = GameBeans.getLocationRepository(player.getName());
+        this.player.setLocation(locationRepo.getInitialLocation());
+        this.player.getLocation().print();
+    	}
+    	else
+    		QueueProvider.offer("You dont have that much gold !");
+		}
+    }
+    
     
     
 

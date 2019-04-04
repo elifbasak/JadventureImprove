@@ -65,8 +65,8 @@ public class CommandCollectionTest {
         collection.command_help();
         int n = countLines(outContent.toString());
 
-        //15 help commands + 1 extra line
-        assertTrue(n == 16);
+        //16 help commands + 1 extra line
+        assertTrue(n == 17);
     }
 
     @Test
